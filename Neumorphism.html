@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Side Navbar Design - Neumorphism Effect</title>
+    
+<style>
+
+html {
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;}
+
+body {
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:#e9edf0;}
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Montserrat", sans-serif;
+font-optical-sizing: auto;
+font-weight:weight;
+font-style:normal;
+transition:0.4s;
+user-select:none;}
+
+img {
+pointer-events:none;}
+
+@font-face {
+font-family:'Digital7';
+src:url('digital-7.ttf') format('truetype');}
+
+.Body {
+position:fixed;
+top:0;
+width:100vw;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow-x:hidden;}
+
+.digital {
+font-family:'Digital7',monospace;
+font-size:4rem;
+letter-spacing:3px;
+color:#A3A3A3;}
+
+.degree {
+font-family: Helvetica, Sans-serif;
+font-size:1.5rem;
+letter-spacing:3px;
+color:#A3A3A3;
+transform:translateY(15px);}
+
+.time {
+position:absolute;
+left:35px;
+bottom:10px;}
+
+.clock {
+position:absolute;
+left:10px;
+bottom:10px;}
+
+.day {
+position:absolute;
+right:10px;
+top:10px;}
+
+.Container {
+position:absolute;
+top:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.control-panel {
+position:absolute;
+height:100%;
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+pointer-events:none;
+background:#e9edf0;}
+
+.control-panel.active {
+pointer-events:auto;}
+
+section {
+position:relative;
+width:100%;
+height:50vh;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.power {
+position:absolute;
+top:0;
+left:0;
+width:65px;
+height:65px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.power button {
+position:absolute;
+width:35px;
+height:35px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+border:none;
+pointer-events:auto;
+cursor:pointer;
+transition:0.3s;
+background:#e9edf0;
+box-shadow:5px 5px 10px #c4c7c9,-5px -5px 10px #ffffff;}
+
+.power button:active, .Buttons button:active {
+transform:scale(0.8);}
+
+.Wrapper {
+position:absolute;
+width:170px;
+height:225px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.screen {
+position:absolute;
+top:0;
+width:170px;
+height:170px;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#e9edf0;
+box-shadow:4px 4px 8px #c4c7c9,-4px -4px 8px #ffffff;}
+
+.info {
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;}
+
+.control-panel.active .info {
+display:flex;}
+
+.Buttons {
+position:absolute;
+bottom:0;
+width:170px;
+height:40px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;}
+
+.Buttons button {
+position:relative;
+width:45px;
+height:45px;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+border:none;
+cursor:pointer;
+transition:0.3s;
+background:#e9edf0;
+box-shadow:4px 4px 8px #c4c7c9,-4px -4px 8px #ffffff;}
+
+.container {
+position:absolute;
+left:20px;
+width:155px;
+height:240px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.Ranges {
+position:absolute;
+top:0;
+width:155px;
+height:160px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:25px;
+list-style:none;}
+
+.range {
+position:relative;
+width:20px;
+height:160px;
+border-radius:12.5px;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:#e9edf0;
+box-shadow:inset -2px 2px 4px #c4c7c9,inset 2px -2px 4px #ffffff;}
+
+.level {
+position:absolute;
+bottom:-140px;
+width:20px;
+height:160px;
+border-radius:12.5px;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:0.3s ease;}
+
+.control-panel.active .range:nth-child(1) .level {
+bottom:-100px;}
+
+.control-panel.active .range:nth-child(2) .level {
+bottom:-50px;}
+
+.control-panel.active .range:nth-child(3) .level {
+bottom:-80px;}
+
+.control-panel.active .range:nth-child(4) .level {
+bottom:-100px;}
+
+.IconsA, .IconsB {
+position:absolute;
+top:170px;
+width:155px;
+height:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:25px;
+list-style:none;}
+
+.IconsB {
+top:200px;}
+
+.icon {
+position:relative;
+width:20px;
+height:20px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.IconsA .icon {
+background:#e9edf0;
+box-shadow:3px 5px 6px #c4c7c9,-3px -3px 6px #ffffff;}
+
+.dot {
+position:relative;
+width:10px;
+height:10px;
+border-radius:50%;}
+
+.icon span {
+position:absolute;
+bottom:-20px;
+font-weight:700;
+color:#CACACA;
+font-size:0.5rem;}
+
+.Settings {
+position:absolute;
+right:0;
+width:160px;
+height:240px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.Swing {
+position:absolute;
+right:0;
+top:0;
+width:100%;
+height:40px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.Toggle {
+position:absolute;
+right:25px;
+width:40px;
+height:20px;
+border-radius:10px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:inset 2px -2px 4px #c4c7c9,inset -2px 2px 4px #ffffff;}
+
+.background {
+position:absolute;
+left:0;
+width:10px;
+height:100%;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#c4c7c9;}
+
+.thumb {
+position:absolute;
+left:-15px;
+width:30px;
+height:30px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#e9edf0;
+box-shadow:-5px 5px 10px #c4c7c9, 5px -5px 10px #ffffff;}
+
+.Toggle.active .background {
+width:40px;}
+
+.Toggle.active .thumb {
+left:25px;}
+
+.Fan {
+position:absolute;
+bottom:0;
+width:100%;
+height:170px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.text {
+position:absolute;
+left:0;
+width:140px;
+height:22px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.Fan .text {
+top:0;}
+
+.text img {
+position:absolute;
+left:0;}
+
+.text span, .power span, .Buttons button span {
+position:absolute;
+font-weight:700;
+color:#CACACA;
+font-size:0.6rem;}
+
+.power span {
+bottom:-5px;}
+
+.text span {
+left:30px;}
+
+.Buttons button span {
+color:black;
+font-size:0.55rem;}
+
+.speed {
+position:absolute;
+bottom:0;
+left:0;
+width:140px;
+height:140px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.speed-button {
+position:absolute;
+width:100px;
+height:100px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#e9edf0;
+box-shadow:10px 10px 20px #c4c7c9,-10px -10px 20px #ffffff;}
+
+.speed img {
+pointer-events:none;
+z-index:2;}
+
+.control-panel.reset .toggle {
+transform:none;} 
+
+.arrow {
+position:absolute;
+top:5px;
+width:22px;
+height:22px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+
+@media screen and (min-height:770px) and (max-width:500px) {
+
+.Container {
+width:100%;
+height:100%;}
+
+.control-panel {
+height:100%;}
+
+.control-panel section {
+height:50vh;}
+
+}
+
+@media screen and (min-height:770px) and (min-width:500px) {
+
+.Container {
+width:400px;
+height:100%;}
+
+.control-panel {
+height:670px;
+border-radius:27.5px;
+box-shadow:10px 10px 20px #c4c7c9,-10px -10px 20px #ffffff;}
+
+.control-panel section {
+height:350px;}
+
+}
+
+@media screen and (max-height:770px) and (min-width:500px) {
+
+.Container {
+width:400px;
+height:770px;}
+
+.control-panel {
+height:670px;
+border-radius:27.5px;
+box-shadow:10px 10px 20px #c4c7c9,-10px -10px 20px #ffffff;}
+
+.control-panel section {
+height:350px;}
+
+}
+
+@media screen and (max-height:770px) and (max-width:500px) {
+
+.Container {
+width:100%;
+height:670px;}
+
+.control-panel {
+height:670px;}
+
+.control-panel section {
+height:350px;}
+
+}
+
+
+</style>
+
+<body>
+
+<div class="Body">
+
+<div class="Container">
+
+<div class="control-panel">
+
+<section>
+
+<div class="power">
+<button class="beep"><img src="power.svg"></button>
+<span>Power</span>
+</div>
+
+<div class="Wrapper">
+
+<div class="screen">
+<div class="info">
+
+<span class="temp digital" style="transform:translateX(5px);">22</span><span class="degree">°C</span>
+<img class="day" src="day.svg">
+<img class="clock" src="time.svg">
+<span class="time digital" style="font-size:0.8rem;font-weight:600;">13:09</span>
+
+</div>
+</div>
+
+<div class="Buttons">
+<button class="minus beep"><img src="minus.svg"></button>
+<button class="reset beep"><span>Reset</span></button>
+<button class="plus beep"><img src="plus.svg"></button>
+</div>
+
+</div>
+
+</section>
+
+
+<section>
+
+<div class="container">
+
+<ul class="Ranges">
+<li class="range"><div class="level" style="background:#67dfb5;"></div></li>
+<li class="range"><div class="level" style="background:#42dce2;"></div></li>
+<li class="range"><div class="level" style="background:#ea7bd9;"></div></li>
+<li class="range"><div class="level" style="background:#516be4;"></div></li>
+</ul>
+
+<ul class="IconsA">
+<li class="icon"><div class="dot" style="background:#67dfb5;"></div></li>
+<li class="icon"><div class="dot" style="background:#42dce2;"></div></li>
+<li class="icon"><div class="dot" style="background:#ea7bd9;"></div></li>
+<li class="icon"><div class="dot" style="background:#516be4;"></div></li>
+</ul>
+
+<ul class="IconsB">
+<li class="icon"><img src="eco.svg"><span>Eco</span></li>
+<li class="icon"><img src="cool.svg"><span>Cool</span></li>
+<li class="icon"><img src="turbo.svg"><span>Turbo</span></li>
+<li class="icon"><img src="sleep.svg"><span>Sleep</span></li>
+
+</ul>
+
+</div>
+
+
+<div class="Settings">
+
+
+<!-- Swing -->
+<div class="Swing">
+
+<div class="text"><img src="swing.svg"><span>Swing</span></div>
+
+<div class="Toggle">
+<div class="background"></div>
+<div class="thumb"></div>
+</div>
+
+</div>
+
+
+<!-- Fan -->
+<div class="Fan">
+
+<div class="text"><img src="fan.svg"><span>Fan Speed</span></div>
+
+<div class="speed">
+<div class="speed-button">
+<div class="arrow"><img src="arrow.svg"></div>
+</div>
+<img src="speed.svg">
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</div>
+
+</div>
+
+<audio class="Audio" src="Beep.mp3">Your browser does not support the audio element.</audio>
+
+<script src="Neumorphism.js"></script>
+
+</body>
+
+</html>
