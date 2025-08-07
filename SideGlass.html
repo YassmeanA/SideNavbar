@@ -677,7 +677,7 @@ setTimeout(() => {SideNavbar.classList.remove("active");},400);
 
 //Open Search window
 search.addEventListener("click",() => {
-
+setTimeout(() => {Body.style.overflowY="hidden";},300);
 FrameS.classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 
@@ -685,6 +685,7 @@ Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 
 //Close Search window
 Back.addEventListener("click",() => {
+Body.style.overflowY="auto";
 FrameS.classList.remove("active");
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
 });
