@@ -108,17 +108,21 @@ width:100%;}
 display:flex;
 left:50px;}
 
-.frame::-webkit-scrollbar {
+.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
 width:10px;}
 
 .frame::-webkit-scrollbar-thumb {
 background:rgba(255, 255, 255,0.3);
 border-radius:5px;}
 
-.Body.touch .frame::-webkit-scrollbar {
+.account-settings::-webkit-scrollbar-thumb {
+background:#D5D5D5;
+border-radius:5px;}
+
+.Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
 display:none;}
 
-.Body.mouse .frame::-webkit-scrollbar {
+.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
 display:flex;}
 
 .Header {
@@ -1331,6 +1335,7 @@ countryInput.value = originalCountry;
 cityInput.value = originalCity;
 
 AccountSettings.classList.remove("active");
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 });
 
 Sections.forEach((Section,index) => {
@@ -1444,6 +1449,7 @@ Save.addEventListener("click", () => {
 setTimeout(() => {
 Save.classList.remove("active");
 AccountSettings.classList.remove("active");
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
 },500);
 
