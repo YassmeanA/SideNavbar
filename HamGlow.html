@@ -1410,6 +1410,7 @@ emailInput.value = originalEmail;
 phoneInput.value = originalPhone;
 
 AccountSettings.classList.remove("active");
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 });
 
 Sections.forEach((Section,index) => {
@@ -1502,6 +1503,7 @@ Save.addEventListener("click", () => {
 setTimeout(() => {
 Save.classList.remove("active");
 AccountSettings.classList.remove("active");
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
 },500);
 
