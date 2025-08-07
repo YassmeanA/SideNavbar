@@ -121,7 +121,7 @@ background:var(--Hover);}
 width:10px;}
 
 .account-settings::-webkit-scrollbar-thumb {
-background:background:var(--hover);;
+background:#DAB3EA;
 border-radius:5px;}
 
 .frame::-webkit-scrollbar-thumb {
@@ -1219,7 +1219,7 @@ countryInput.value = originalCountry;
 cityInput.value = originalCity;
 
 AccountSettings.classList.remove("active");
-AccountSettings.scrollTop = 0;
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 
 });
 
@@ -1334,7 +1334,7 @@ Save.addEventListener("click", () => {
 setTimeout(() => {
 Save.classList.remove("active");
 AccountSettings.classList.remove("active");
-AccountSettings.scrollTop = 0;
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
 },500);
 
