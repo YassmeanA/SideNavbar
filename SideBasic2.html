@@ -1262,7 +1262,7 @@ MenuItem.classList.add("active");
 setTimeout(() => {FrameSs[index].classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
-setTimeout(() => {deactivate();},600);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},600);
 
 });
 });
@@ -1276,7 +1276,7 @@ MenuItem.classList.add("active");
 setTimeout(() => {FrameSs[index].classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
-setTimeout(() => {deactivate();},600);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},600);
 
 });
 });
@@ -1285,6 +1285,8 @@ setTimeout(() => {deactivate();},600);
 //Click on back btns
 Backs.forEach((Back,index) => {
 Back.addEventListener("click",() => {
+
+Body.style.overflowY="auto";
 
 FrameSs.forEach(FrameS => {
 FrameS.classList.remove("active");});
@@ -1314,14 +1316,13 @@ Texts[index].style.display="none";
 });
 });
 
-
 Account.addEventListener("click",() => {
-AccountSettings.classList.add("active");
 
-Frames.forEach(Frame => {
-Frame.style.overflowY="hidden";});
+setTimeout(() => {AccountSettings.classList.add("active");},400);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";Frames.forEach(Frame => {Frame.style.overflowY="hidden";});},800);
 
 });
+
 
 
 BackAS.addEventListener("click",() => {
@@ -1334,6 +1335,7 @@ phoneInput.value = originalPhone;
 countryInput.value = originalCountry;
 cityInput.value = originalCity;
 
+Body.style.overflowY="auto";
 AccountSettings.classList.remove("active");
 setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 });
