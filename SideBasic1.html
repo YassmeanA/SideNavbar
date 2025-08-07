@@ -1367,7 +1367,7 @@ countryInput.value = originalCountry;
 cityInput.value = originalCity;
 
 AccountSettings.classList.remove("active");
-setTimeout(() => {AccountSettings.scrolltop = 0;},400);
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
  
 });
 
@@ -1482,7 +1482,7 @@ Save.addEventListener("click", () => {
 setTimeout(() => {
 Save.classList.remove("active");
 AccountSettings.classList.remove("active");
-setTimeout(() => {AccountSettings.scrolltop = 0;},400);
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
 },500);
 
