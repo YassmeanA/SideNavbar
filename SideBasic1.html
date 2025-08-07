@@ -126,6 +126,12 @@ display:none;}
 .Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
 display:flex;}
 
+.Body::-webkit-scrollbar {
+pointer-events:auto;}
+    
+.Body.A::-webkit-scrollbar {
+pointer-events:none;}
+
 .Header {
 position:fixed;
 top:0;
@@ -1313,6 +1319,7 @@ setTimeout(() => {FrameSs[index].classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
 setTimeout(() => {deactivate();},600);
+Body.classList.add("A");
 
 });
 });
@@ -1321,7 +1328,7 @@ setTimeout(() => {deactivate();},600);
 //Click on back btns
 Backs.forEach((Back,index) => {
 Back.addEventListener("click",() => {
-
+Body.classList.remove("A");
 FrameSs.forEach(FrameS => {
 FrameS.classList.remove("active");});
 
@@ -1353,6 +1360,7 @@ Texts[index].style.display="none";
 Account.addEventListener("click",() => {
 setTimeout(() => {AccountSettings.classList.add("active");},400);
 setTimeout(() => {deactivate();},800);
+Body.classList.add("A");
 
 });
 
