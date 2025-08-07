@@ -120,6 +120,10 @@ width:10px;}
 background:rgba(255, 255, 255,0.3);
 border-radius:5px;}
 
+.account-settings::-webkit-scrollbar-thumb {
+background:#D5D5D5;
+border-radius:5px;}
+
 .Body.touch .frame::-webkit-scrollbar, .Body.touch .side-navbar::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
 display:none;}
 
@@ -1078,6 +1082,7 @@ const ItemBtns = document.querySelectorAll(".item-btn.N");
 const ItemMenus = document.querySelectorAll(".item.menu");
 const MenuItemAs = document.querySelectorAll(".menu-item.A");
 const Frames = document.querySelectorAll(".frame.N");
+const FrameSs = document.querySelectorAll(".frame.S");
 const Backs = document.querySelectorAll(".back");
 const BackAS = document.querySelector(".Back");
 const AccountSettings = document.querySelector(".account-settings");
@@ -1232,6 +1237,8 @@ countryInput.value = originalCountry;
 cityInput.value = originalCity;
 
 AccountSettings.classList.remove("active");
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
+
 });
 
 Sections.forEach((Section,index) => {
@@ -1345,6 +1352,7 @@ Save.addEventListener("click", () => {
 setTimeout(() => {
 Save.classList.remove("active");
 AccountSettings.classList.remove("active");
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
 },500);
 
