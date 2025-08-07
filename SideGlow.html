@@ -1469,7 +1469,7 @@ MenuItem.classList.add("active");
 setTimeout(() => {FrameSs[index].classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
-setTimeout(() => {deactivate();},600);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},600);
 
 });
 });
@@ -1483,7 +1483,7 @@ MenuItem.classList.add("active");
 setTimeout(() => {FrameSs[index].classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
-setTimeout(() => {deactivate();},600);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},600);
 
 });
 });
@@ -1493,6 +1493,8 @@ setTimeout(() => {deactivate();},600);
 Backs.forEach((Back,index) => {
 Back.addEventListener("click",() => {
 
+Body.style.overflowY="auto";
+    
 FrameSs.forEach(FrameS => {
 FrameS.classList.remove("active");});
 
@@ -1547,7 +1549,7 @@ Settings.querySelector(".circle").classList.remove("active");
 AccountSettings.classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },500);
-setTimeout(() => {deactivate();},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
 
 });
 
@@ -1558,7 +1560,8 @@ profileEditImg.src = originalImg;
 usernameInput.value = originalUsername;
 emailInput.value = originalEmail;
 phoneInput.value = originalPhone;
-
+    
+Body.style.overflowY="auto";
 AccountSettings.classList.remove("active");
 setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 
