@@ -816,6 +816,7 @@ Save.addEventListener("click", () => {
 
 setTimeout(() => {
 Save.classList.remove("active");
+Body.style.overflowY="auto";
 AccountSettings.classList.remove("active");
 setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
