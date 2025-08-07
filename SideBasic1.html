@@ -109,7 +109,7 @@ width:100%;}
 display:flex;
 left:50px;}
 
-.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
+.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar, .Body::-webkit-scrollbar {
 width:10px;}
 
 .frame::-webkit-scrollbar-thumb {
@@ -120,17 +120,18 @@ border-radius:5px;}
 background:#DAB3EA;
 border-radius:5px;}
 
-.Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
+.Body.touch::-webkit-scrollbar, .Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
 display:none;}
 
-.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
+.Body.mouse::-webkit-scrollbar, .Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
 display:flex;}
-
-.Body::-webkit-scrollbar {
-pointer-events:auto;}
     
-.Body.A::-webkit-scrollbar {
-pointer-events:none;}
+.Body::-webkit-scrollbar-track {
+background:#D5D5D5;}
+    
+.Body::-webkit-scrollbar-thumb {
+background:#A3A3A3;
+border-radius:5px;}
 
 .Header {
 position:fixed;
