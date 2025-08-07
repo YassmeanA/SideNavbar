@@ -109,7 +109,7 @@ width:100%;}
 display:flex;
 left:50px;}
 
-.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar, .Body::-webkit-scrollbar {
+.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
 width:10px;}
 
 .frame::-webkit-scrollbar-thumb {
@@ -120,18 +120,11 @@ border-radius:5px;}
 background:#DAB3EA;
 border-radius:5px;}
 
-.Body.touch::-webkit-scrollbar, .Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
+.Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
 display:none;}
 
-.Body.mouse::-webkit-scrollbar, .Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
+.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
 display:flex;}
-    
-.Body::-webkit-scrollbar-track {
-background:#D5D5D5;}
-    
-.Body::-webkit-scrollbar-thumb {
-background:#A3A3A3;
-border-radius:5px;}
 
 .Header {
 position:fixed;
@@ -1305,21 +1298,7 @@ MenuItem.classList.add("active");
 setTimeout(() => {FrameSs[index].classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
-setTimeout(() => {deactivate();},600);
-
-});
-});
-
-
-// Click on each menu-item of submenus
-MenuItemBs.forEach((MenuItem,index) => {
-MenuItem.addEventListener("click",() => {
-
-MenuItem.classList.add("active");
-setTimeout(() => {FrameSs[index].classList.add("active");
-Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
-},300);
-setTimeout(() => {deactivate();},600);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},600);
 
 });
 });
@@ -1329,6 +1308,8 @@ setTimeout(() => {deactivate();},600);
 Backs.forEach((Back,index) => {
 Back.addEventListener("click",() => {
 
+Body.style.overflowY="auto";
+    
 FrameSs.forEach(FrameS => {
 FrameS.classList.remove("active");});
 
@@ -1359,7 +1340,7 @@ Texts[index].style.display="none";
 
 Account.addEventListener("click",() => {
 setTimeout(() => {AccountSettings.classList.add("active");},400);
-setTimeout(() => {deactivate();},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
 
 });
 
@@ -1372,7 +1353,8 @@ emailInput.value = originalEmail;
 phoneInput.value = originalPhone;
 countryInput.value = originalCountry;
 cityInput.value = originalCity;
-
+    
+Body.style.overflowY="auto";
 AccountSettings.classList.remove("active");
 setTimeout(() => {AccountSettings.scrollTop = 0;},400);
  
