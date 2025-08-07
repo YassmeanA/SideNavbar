@@ -1219,6 +1219,9 @@ setTimeout(() => {deactivate();},500);
 Backs.forEach((Back,index) => {
 Back.addEventListener("click",() => {
 
+FrameSs.forEach(FrameS => {
+FrameS.classList.remove("active");});
+    
 Frames.forEach(Frame => {
 Frame.style.overflowY="auto";
 Frame.style.filter="brightness(100%)";});
