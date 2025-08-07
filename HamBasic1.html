@@ -117,17 +117,21 @@ background:transparent;}
 border-radius:3px;
 background:var(--Hover);}
 
-.frame::-webkit-scrollbar {
+.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
 width:10px;}
+
+.account-settings::-webkit-scrollbar-thumb {
+background:background:var(--hover);;
+border-radius:5px;}
 
 .frame::-webkit-scrollbar-thumb {
 background:rgba(255, 255, 255,0.3);
 border-radius:5px;}
 
-.Body.touch .frame::-webkit-scrollbar, .Body.touch .side-navbar::-webkit-scrollbar {
+.Body.touch .frame::-webkit-scrollbar, .Body.touch .side-navbar::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
 display:none;}
 
-.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .side-navbar::-webkit-scrollbar {
+.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .side-navbar::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
 display:flex;}
 
 .Header {
@@ -1215,6 +1219,8 @@ countryInput.value = originalCountry;
 cityInput.value = originalCity;
 
 AccountSettings.classList.remove("active");
+AccountSettings.scrollTop = 0;
+
 });
 
 Sections.forEach((Section,index) => {
@@ -1327,7 +1333,8 @@ Save.addEventListener("click", () => {
 
 setTimeout(() => {
 Save.classList.remove("active");
-AccountSettings.classList.remove("active");
+AccountSettings.classList.remove("active
+AccountSettings.scrollTop = 0;
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
 },500);
 
