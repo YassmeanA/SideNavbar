@@ -1303,6 +1303,19 @@ setTimeout(() => {deactivate();Body.style.overflowY="hidden";},600);
 });
 });
 
+// Click on each menu-item of submenus
+MenuItemBs.forEach((MenuItem,index) => {
+MenuItem.addEventListener("click",() => {
+
+MenuItem.classList.add("active");
+setTimeout(() => {FrameSs[index].classList.add("active");
+Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
+},300);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},600);
+
+});
+});
+
 
 //Click on back btns
 Backs.forEach((Back,index) => {
