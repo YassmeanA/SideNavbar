@@ -726,6 +726,8 @@ AccountSettings.classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
 
+setTimeout(() => {Body.style.overflowY="hidden";},600);
+
 });
 
 
@@ -743,6 +745,7 @@ cityInput.value = originalCity;
 AccountSettings.classList.remove("active");
 setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
+Body.style.overflowY="auto";
 });
 
 
