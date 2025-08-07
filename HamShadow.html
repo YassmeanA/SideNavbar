@@ -1354,11 +1354,6 @@ setTimeout(() => {deactivate();},800);
 
 //Close Account Settings
 BackAS.addEventListener("click",() => {
-AccountSettings.classList.remove("active");
-Frames.forEach(Frame => {Frame.style.overflowY="auto";});
-});
-
-BackAS.addEventListener("click",() => {
 
 profileEditImg.src = originalImg;
 usernameInput.value = originalUsername;
@@ -1366,6 +1361,7 @@ emailInput.value = originalEmail;
 phoneInput.value = originalPhone;
 
 AccountSettings.classList.remove("active");
+setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 });
 
 Sections.forEach((Section,index) => {
