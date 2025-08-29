@@ -159,7 +159,7 @@ SideNavbar.style.cursor="grabbing";
   }
 });
 
-SideNavbar.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", (e) => {
 dragMove(e.clientX, e.clientY);
 });
 
@@ -170,4 +170,5 @@ endDrag();});
 SideNavbar.addEventListener("mouseleave", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
+
 
