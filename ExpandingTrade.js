@@ -155,20 +155,24 @@ document.addEventListener("touchend", () => endDrag());
 SideNavbar.style.cursor="grab";
 
 // ------------------ Mouse Events ------------------
+// ------------------ Mouse Events ------------------
 SideNavbar.addEventListener("mousedown", (e) => {
-SideNavbar.style.cursor="grabbing";
-  if (e.button === 0) {
-    startDrag(e.clientX, e.clientY);
+  if (e.button !== 0) return; // left click only
+  e.preventDefault();
+  SideNavbar.style.cursor = "grabbing";
+  startDrag(e.clientX, e.clientY);
+
+  // Attach move + up handlers only while dragging
+  function onMouseMove(ev) {
+    dragMove(ev.clientX, ev.clientY);
   }
+  function onMouseUp() {
+    SideNavbar.style.cursor = "grab";
+    endDrag();
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+  }
+
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mouseup", onMouseUp);
 });
-
-document.addEventListener("mousemove", (e) => {
-dragMove(e.clientX, e.clientY);
-});
-
-document.addEventListener("mouseup", () => {
-SideNavbar.style.cursor="grab";
-endDrag();});
-
-
-
