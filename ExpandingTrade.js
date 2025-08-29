@@ -101,7 +101,8 @@ function dragMove(clientX, clientY) {
   if (!isVerticalScroll && Math.abs(dy) > Math.abs(dx)) {
     isVerticalScroll = true;
   }
-  //if (isVerticalScroll) return;
+  
+  if (isVerticalScroll) return;
 
   let newWidth = startWidth + dx;
   newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
@@ -159,20 +160,10 @@ SideNavbar.style.cursor="grabbing";
   }
 });
 
-document.addEventListener("mousemove", (e) => {
+SideNavbar.addEventListener("mousemove", (e) => {
 dragMove(e.clientX, e.clientY);
 });
 
 document.addEventListener("mouseup", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
-
-//SideNavbar.addEventListener("mouseleave", () => {
-//SideNavbar.style.cursor="grab";
-//endDrag();});
-
-
-
-
-
-
