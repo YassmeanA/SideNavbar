@@ -166,11 +166,8 @@ SideNavbar.addEventListener("mousemove", (e) => {
 dragMove(e.clientX, e.clientY);
 });
 
-document.addEventListener("mousemove", (e) => {
-dragMove(e.clientX, e.clientY);
-});
-
 document.addEventListener("mouseup", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
+
 
