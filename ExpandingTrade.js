@@ -152,6 +152,8 @@ SideNavbar.addEventListener("touchmove", (e) => {
 
 document.addEventListener("touchend", () => endDrag());
 
+SideNavbar.style.cursor="grab";
+
 // ------------------ Mouse Events ------------------
 SideNavbar.addEventListener("mousedown", (e) => {
 SideNavbar.style.cursor="grabbing";
@@ -164,6 +166,11 @@ SideNavbar.addEventListener("mousemove", (e) => {
 dragMove(e.clientX, e.clientY);
 });
 
+document.addEventListener("mousemove", (e) => {
+dragMove(e.clientX, e.clientY);
+});
+
 document.addEventListener("mouseup", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
+
