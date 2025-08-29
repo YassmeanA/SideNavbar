@@ -1,4 +1,4 @@
-const Body = document.querySelector(".Body");
+const Body = document.querySelector(".Body"); 
 const SideNavbar = document.querySelector(".side-navbar");
 const Items = document.querySelectorAll(".item.N");
 const Frames = document.querySelectorAll(".frame");
@@ -153,28 +153,19 @@ SideNavbar.addEventListener("touchmove", (e) => {
 document.addEventListener("touchend", () => endDrag());
 
 SideNavbar.style.cursor="grab";
-SideNavbar.style.background="red";
 
-// ------------------ Mouse Events ------------------
 // ------------------ Mouse Events ------------------
 SideNavbar.addEventListener("mousedown", (e) => {
-  if (e.button !== 0) return; // left click only
-  e.preventDefault();
-  SideNavbar.style.cursor = "grabbing";
-  startDrag(e.clientX, e.clientY);
-
-  // Attach move + up handlers only while dragging
-  function onMouseMove(ev) {
-    dragMove(ev.clientX, ev.clientY);
+SideNavbar.style.cursor="grabbing";
+  if (e.button === 0) {
+    startDrag(e.clientX, e.clientY);
   }
-  function onMouseUp() {
-    SideNavbar.style.cursor = "grab";
-    endDrag();
-    document.removeEventListener("mousemove", onMouseMove);
-    document.removeEventListener("mouseup", onMouseUp);
-  }
-
-  document.addEventListener("mousemove", onMouseMove);
-  document.addEventListener("mouseup", onMouseUp);
 });
 
+SideNavbar.addEventListener("mousemove", (e) => {
+dragMove(e.clientX, e.clientY);
+});
+
+document.addEventListener("mouseup", () => {
+SideNavbar.style.cursor="grab";
+endDrag();});
