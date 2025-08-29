@@ -118,7 +118,7 @@ function dragMove(clientX, clientY) {
 }
 
 function endDrag() {
-  if (!isDragging || isVerticalScroll) return;
+  if (!isDragging) return;
 
   isDragging = false;
   SideNavbar.style.transition = "0.4s";
@@ -149,7 +149,7 @@ SideNavbar.addEventListener("touchmove", (e) => {
   }
 }, { passive: true });
 
-SideNavbar.addEventListener("touchend", () => endDrag());
+document.addEventListener("touchend", () => endDrag());
 
 // ------------------ Mouse Events ------------------
 SideNavbar.addEventListener("mousedown", (e) => {
@@ -163,10 +163,11 @@ SideNavbar.addEventListener("mousemove", (e) => {
 dragMove(e.clientX, e.clientY);
 });
 
-SideNavbar.addEventListener("mouseup", () => {
+document.addEventListener("mouseup", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
 
 SideNavbar.addEventListener("mouseleave", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
+
