@@ -162,12 +162,13 @@ SideNavbar.style.cursor="grabbing";
   }
 });
 
-SideNavbar.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", (e) => {
 dragMove(e.clientX, e.clientY);
 });
 
 document.addEventListener("mouseup", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
+
 
 
