@@ -153,6 +153,7 @@ SideNavbar.addEventListener("touchmove", (e) => {
 document.addEventListener("touchend", () => endDrag());
 
 SideNavbar.style.cursor="grab";
+SideNavbar.style.background="red";
 
 // ------------------ Mouse Events ------------------
 // ------------------ Mouse Events ------------------
@@ -176,3 +177,4 @@ SideNavbar.addEventListener("mousedown", (e) => {
   document.addEventListener("mousemove", onMouseMove);
   document.addEventListener("mouseup", onMouseUp);
 });
+
