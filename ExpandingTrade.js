@@ -167,8 +167,9 @@ document.addEventListener("mouseup", () => {
 SideNavbar.style.cursor="grab";
 endDrag();});
 
-SideNavbar.addEventListener("mouseleave", () => {
-SideNavbar.style.cursor="grab";
-endDrag();});
+//SideNavbar.addEventListener("mouseleave", () => {
+//SideNavbar.style.cursor="grab";
+//endDrag();});
+
 
 
