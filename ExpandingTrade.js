@@ -97,12 +97,6 @@ function dragMove(clientX, clientY) {
   const dx = clientX - startX;
   const dy = clientY - startY;
 
-  // Cancel drag if vertical scroll is detected
-  if (!isVerticalScroll && Math.abs(dy) > Math.abs(dx)) {
-    isVerticalScroll = true;
-  }
-  
-  if (isVerticalScroll) return;
 
   let newWidth = startWidth + dx;
   newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
@@ -144,7 +138,7 @@ SideNavbar.addEventListener("touchstart", (e) => {
   }
 }, { passive: true });
 
-SideNavbar.addEventListener("touchmove", (e) => {
+document.addEventListener("touchmove", (e) => {
   if (e.touches.length === 1) {
     dragMove(e.touches[0].clientX, e.touches[0].clientY);
   }
@@ -162,7 +156,7 @@ SideNavbar.style.cursor="grabbing";
   }
 });
 
-SideNavbar.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", (e) => {
 dragMove(e.clientX, e.clientY);
 });
 
