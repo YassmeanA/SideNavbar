@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Smart Home App Design</title>
+
+<style>
+
+html {
+-webkit-tap-highlight-color: transparent;
+scroll-behavior:smooth;}
+
+body{
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+min-height:100vh;}
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Montserrat", sans-serif;
+font-optical-sizing: auto;
+font-weight:weight;
+font-style:normal;
+transition:0.4s;
+user-select:none;}
+
+img {
+pointer-events:none;}
+
+.container5 {
+position:absolute;
+width:330px;
+height:600px;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:#271b49;}
+
+.Block {
+position:absolute;
+width:330px;
+height:600px;
+z-index:5;}
+
+.side-navbar {
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;}
+
+/* Section Container*/
+.section-container {
+position:absolute;
+top:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow-x:hidden;
+overflow-y:auto;
+opacity:0;
+transition:0.3s;}
+
+.section-container.active {
+opacity:1;}
+
+.logo {
+position:absolute;
+left:15px;
+top:15px;
+transform:translate(125px,220px) scale(4);
+width:50px;
+height:50px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.logo .part1 {
+stroke-dashoffset:95;
+stroke-dasharray:95;}
+
+.logo .part2, .logo .part3, .logo .part4 {
+opacity:0;
+transform:translateY(20px);}
+
+.logo {
+animation:Position 0.6s forwards 4.5s;}
+
+.part1 {
+animation: Part1 1.5s ease-in forwards 1s;}
+
+.part2 {
+animation: Part2 0.3s cubic-bezier(0,0,0.5,1.5) forwards 2s;}
+
+.part3 {
+animation: Part2 0.3s cubic-bezier(0,0,0.5,1.5) forwards 2.5s;}
+
+.part4 {
+animation: Part2 0.3s cubic-bezier(0,0,0.5,1.5) forwards 3s;}
+
+@keyframes Part1 {
+to{stroke-dashoffset:0;}}
+
+@keyframes Part2 {
+to{opacity:1;transform:translateY(0);}}
+
+@keyframes Opacity {
+to{opacity:1;}}
+
+@keyframes Position {
+to{transform:translate(0,0) scale(1);}}
+
+.logo span {
+position:absolute;
+bottom:-10px;
+font-size:0.5rem;
+font-weight:700;
+opacity:0;
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px rgba(247,15,139,0.5);
+animation:Opacity 0.5s forwards 3.6s;}
+
+.section-list {
+position:absolute;
+top:150px;
+width:100%;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:30px;
+list-style:none;
+padding-bottom:50px;
+transform:scale(0.8) translate(-40px,-80px);}
+
+.section-list.active {
+display:flex;}
+
+.Section {
+position:relative;
+width:calc(100% - 40px);
+height:50px;
+opacity:0;
+transform:translateY(30px);
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;}
+
+.Section .icon1, .Section .icon2 {
+position:absolute;
+left:0;
+width:50px;
+height:50px;
+transition:0.3s;}
+
+.Section .icon2 {
+opacity:0;}
+
+.Section.active .icon1 {
+opacity:0;}
+
+.Section.active .icon2 {
+opacity:1;}
+
+.Section span {
+position:absolute;
+left:60px;
+font-size:0.8rem;
+transition:0.3s;
+color:rgba(255,255,255,0.5);}
+
+.Section.active span {
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px rgba(247,15,139,0.5);}
+
+/* Item Container*/
+.item-container {
+position:absolute;
+top:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow-x:hidden;
+overflow-y:auto;
+opacity:0;
+transition:0.3s;}
+
+.item-container.active {
+opacity:1;}
+
+.item-container .slide {
+position:absolute;
+width:80%;
+height:70%;
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+transform:translateY(30px);
+transition:0.5s;
+border-radius:20px;
+background:rgba(255,255,255,0.01);
+border:1px solid rgba(255,255,255,0.05);
+box-shadow:0px 5px 7px rgba(237,96,164,0.05);
+color:rgba(255,255,255,0.5);
+text-shadow:0px 5px 7px rgba(237,96,164,0.05);}
+
+.item-container .slide.active {
+opacity:1;
+transform:translateY(0);}
+
+.item-list {
+position:absolute;
+top:80px;
+width:calc(100% - 40px);
+display:none;
+grid-template-columns:repeat(2,135px);
+justify-content:center;
+align-items:center;
+gap:20px;
+padding-bottom:50px;}
+
+.item-list.active {
+display:grid;}
+
+.item {
+position:relative;
+opacity:0;
+width:135px;
+height:135px;
+transform:translateY(100px);
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.item .content {
+position:absolute;
+flex-shrink:0;
+width:100%;
+height:100%;
+border-radius:16px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+background:rgba(255,255,255,0.01);
+border:1px solid rgba(255,255,255,0.05);
+box-shadow:0px 5px 7px rgba(237,96,164,0.05);}
+
+.content .room {
+position:absolute;
+transition:0.5s;
+font-size:0.9rem;
+color:rgba(255,255,255,0.5);}
+
+.content img {
+position:absolute;
+width:100%;
+height:100%;
+opacity:0.4;
+border-radius:15px;
+object-fit:cover;}
+
+svg {
+position:absolute;}
+
+.item rect {
+position:absolute;
+stroke-dashoffset:620;
+stroke-dasharray:620;
+stroke-linecap:round;
+display:none;}
+
+.item.active rect {
+display:flex;
+animation:Stroke 1.6s linear forwards;}
+
+.item.active .room {
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px #fc08b7;}
+
+@keyframes Show {
+to {transform:translateY(0);opacity:1;}}
+
+@keyframes Stroke {
+to {stroke-dashoffset:0;}}
+
+.item .Info {
+position:absolute;
+width:calc(100% - 20px);
+bottom:10px;
+left:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;}
+
+.item .info {
+position:relative;
+width:100%;
+height:15px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.item .info .text1 {
+position:absolute;
+left:0;
+color:#A3A3A3;
+font-size:0.5rem;}
+
+.item .info .text2 {
+position:absolute;
+right:0;
+font-size:0.5rem;
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px #fc08b7;}
+
+
+/* Details */
+
+.details {
+position:absolute;
+top:0;
+width:100%;
+height:100%;
+opacity:0;
+display:none;
+justify-content:center;
+align-items:center;
+overflow-x:hidden;
+overflow-y:auto;
+scroll-behavior:smooth;}
+
+.details.active {
+display:flex;
+opacity:1;}
+
+.details-list {
+position:absolute;
+top:80px;
+width:calc(100% - 40px);
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+gap:20px;
+padding:20px 0;
+list-style:none;}
+
+.details-list.active {
+display:flex;}
+
+.details-list .section {
+position:relative;
+width:100%;
+height:230px;
+border-radius:20px;
+opacity:0;
+transform:translateY(100px);
+display:flex;
+justify-content:center;
+align-items:center;
+background:rgba(255,255,255,0.01);
+border:1px solid rgba(255,255,255,0.05);
+box-shadow:0px 5px 7px rgba(237,96,164,0.05);}
+
+.section .title {
+position:absolute;
+width:100%;
+height:30px;
+left:0;
+top:15px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.title img {
+position:absolute;
+width:26px;
+height:26px;
+left:15px;}
+
+.title span {
+position:absolute;
+left:50px;
+color:rgba(255,255,255,0.5);
+font-size:0.8rem;}
+
+/* Lighting Section */
+.section .lighting {
+position:absolute;
+width:100%;
+list-style:none;
+display:grid;
+grid-template-columns:repeat(2,50px);
+column-gap:calc(100% - 180px);
+row-gap:30px;
+justify-content:center;
+align-items:center;
+transform:scale(0.9);}
+
+.lamp {
+position:relative;
+width:50px;
+height:50px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.lamp .stroke {
+position:absolute;
+width:25px;
+height:25px;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+border-radius:50%;
+border:1px solid rgba(255,255,255,0.05);}
+
+.lighting .lamp .stroke {
+top:0;}
+
+.lamp .circle {
+position:absolute;
+width:25px;
+height:25px;
+border-radius:50%;
+transition:0.3s;
+background:linear-gradient(rgba(247,15,139,1),rgba(252,8,183,1));
+opacity:0;
+box-shadow:0px 5px 7px rgba(237,96,164,0.05);}
+
+.lamp span {
+position:absolute;
+transition:0.3s;
+font-size:0.6rem;
+color:rgba(255,255,255,0.5);
+text-shadow:0px 5px 7px rgba(237,96,164,0.05);}
+
+.lighting .lamp span {
+bottom:0;}
+
+.lamp.active .circle {
+opacity:1;
+box-shadow:0px 2px 10px rgba(237,96,164,0.5);}
+
+.lamp.active span {
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px #fc08b7;}
+
+/* Air Conditioner Section */
+.power, .swing {
+position:absolute;
+left:20px;
+width:60px;
+height:60px;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:0.3s;
+transform:scale(0.9);}
+
+.swing {
+height:55px;
+bottom:20px;}
+
+.power span, .swing span, .heat span {
+position:absolute;
+bottom:0;
+font-size:0.6rem;
+color:rgba(255,255,255,0.5);}
+
+.power svg {
+position:absolute;
+top:0;
+cursor:pointer;}
+
+.power .on {
+opacity:0;
+transition:0.3s;}
+
+.power .off {
+transition:0.3s;}
+
+.power.active .on {
+opacity:1;}
+
+.power.active .off {
+opacity:0;}
+
+.power.active span {
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px #fc08b7;}
+
+.toggle {
+position:absolute;
+top:10px;
+width:30px;
+height:15px;
+border-radius:7.5px;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:0.3s;
+cursor:pointer;
+background:rgba(255,255,255,0.1);}
+
+.toggle .background {
+position:absolute;
+left:0px;
+width:5px;
+height:15px;
+border-radius:7.5px;
+transition:0.3s;
+background:linear-gradient(#f70f8b,#fc08b7);
+box-shadow:0 0 10px rgba(237,96,164,0.7);}
+
+.toggle .thumb {
+position:absolute;
+left:-12.5px;
+width:25px;
+height:25px;
+border-radius:50%;
+transition:0.3s;
+background:white;}
+
+.toggle.active .background {
+width:30px;}
+
+.toggle.active .thumb {
+left:17.5px;}
+
+.temperature {
+position:absolute;
+top:60px;
+right:20px;
+width:120px;
+height:150px;
+display:flex;
+justify-content:center;
+align-items:center;
+transform:scale(0.8);}
+
+.temperature .screen {
+position:absolute;
+top:0;
+width:105px;
+height:105px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.temperature .Buttons {
+position:absolute;
+bottom:0;
+width:120px;
+height:45px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.temperature .Buttons button {
+position:absolute;
+width:45px;
+height:45px;
+background:none;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.05);
+display:flex;
+justify-content:center;
+align-items:center;
+transition:0.3s;
+font-size:1rem;
+color:rgba(255,255,255,0.5);
+cursor:pointer;}
+
+.minus {
+left:0;}
+
+.plus {
+right:0;}
+
+.Buttons button:active, .controls button:active, .back:active {
+transform:scale(0.8);}
+
+@font-face {
+font-family:'Digital7';
+src:url('JS/digital-7.ttf') format('truetype');}
+
+.digital {
+font-family:'Digital7',monospace;
+font-size:4rem;
+letter-spacing:3px;
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px #fc08b7;}
+
+.degree {
+font-family: Helvetica, Sans-serif;
+font-size:1.5rem;
+letter-spacing:3px;
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px #fc08b7;
+transform:translateY(15px);}
+
+.heat {
+position:absolute;
+top:60px;
+right:20px;
+width:140px;
+height:140px;
+display:flex;
+justify-content:center;
+align-items:center;
+transform:scale(0.8);}
+
+.Control {
+position:absolute;
+width:140px;
+height:140px;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.control {
+position:absolute;
+width:80px;
+height:80px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+border:1px solid rgba(255,255,255,0.05);}
+
+.control .arrow {
+position:absolute;
+top:0;}
+
+.controls {
+position:absolute;
+right:20px;
+width:140px;
+height:140px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+transform:scale(0.8);
+border:1px solid rgba(255,255,255,0.05);}
+
+button {
+position:absolute;
+width:45px;
+height:45px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:none;
+border:none;
+cursor:pointer;}
+
+.up {
+top:0;}
+
+.down {
+bottom:0;}
+
+.right {
+right:0;}
+
+.left {
+left:0;}
+
+.OK {
+width:55px;
+height:55px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,0.05);
+color:transparent;
+background:linear-gradient(#f70f8b,#fc08b7);
+-webkit-background-clip:text;
+background-clip:text;
+text-shadow:0 1px 5px #fc08b7;}
+
+.presets {
+position:absolute;
+right:140px;
+top:60px;
+width:50px;
+height:150px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+transform:scale(0.9);
+gap:0px;}
+
+.presets .lamp span {
+left:50px;
+width:200px;}
+
+.back, .Back {
+position:absolute;
+top:15px;
+right:15px;
+width:45px;
+height:45px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+background:#271b49;
+border:1px solid rgba(255,255,255,0.05);}
+
+.mouse {
+position:absolute;
+width:20px;
+height:20px;
+transition:0.5s;
+transform:translate(180px,50px);}
+
+.cursor {
+position:absolute;
+width:20px;
+height:20px;
+border-radius:10px;
+transition:0.3s;
+box-shadow:0 1.5px 5px rgba(255,255,255,0.4);
+border:1px solid rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.2);}
+
+.cursor.active, .minus.active, .back.active {
+animation:click 0.3s forwards;}
+
+@keyframes click {
+0%{transform:scale(1);}
+50%{transform:scale(0.8);}
+100%{transform:scale(1);}}
+
+</style>
+
+<body>
+
+<div class="container5">
+
+<div class="side-navbar">
+
+<div class="section-container">
+
+<div class="logo">
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path class="part2" filter="url(#logo-shadow)" fill="url(#grad-stroke)" d="M43.761 45.7163C43.3143 46.0337 42.8302 46.1519 42.3085 46.0708C41.7868 45.9898 41.3715 45.7319 41.0626 45.2972C40.7536 44.8625 40.6467 44.3854 40.7418 43.8661C40.8369 43.3468 41.1077 42.9285 41.5544 42.6111C42.001 42.2937 42.4851 42.1755 43.0068 42.2566C43.5285 42.3376 43.9438 42.5955 44.2528 43.0302C44.5617 43.465 44.6686 43.942 44.5735 44.4613C44.4784 44.9806 44.2076 45.399 43.761 45.7163Z"/>
+<path class="part3" filter="url(#logo-shadow)" fill="url(#grad-stroke)" d="M38.9064 38.8848C39.704 38.318 40.55 37.9038 41.4446 37.642C42.3391 37.3802 43.233 37.259 44.1264 37.2784C44.4494 37.2826 44.7039 37.4096 44.8898 37.6594C45.0756 37.9093 45.1387 38.1954 45.079 38.5176C45.0232 38.822 44.8644 39.0714 44.6023 39.2657C44.3403 39.46 44.0513 39.56 43.7354 39.5658C43.14 39.5838 42.5426 39.689 41.9431 39.8814C41.3436 40.0737 40.7727 40.3626 40.2304 40.7479C39.6881 41.1333 39.2275 41.5774 38.8487 42.0803C38.4698 42.5832 38.174 43.1127 37.9611 43.669C37.8514 43.965 37.66 44.2023 37.3868 44.3809C37.1136 44.5595 36.824 44.625 36.5182 44.5775C36.2051 44.5196 35.9584 44.364 35.7784 44.1106C35.5983 43.8572 35.5593 43.5771 35.6614 43.2703C35.9373 42.42 36.3478 41.618 36.8928 40.8643C37.4378 40.1107 38.109 39.4508 38.9064 38.8848Z"/>
+<path class="part4" filter="url(#logo-shadow)" fill="url(#grad-stroke)" d="M36.2585 35.1585C37.5878 34.2139 38.9908 33.5363 40.4676 33.1255C41.9445 32.7147 43.4264 32.5652 44.9134 32.6768C45.2511 32.7016 45.5173 32.8397 45.7118 33.0909C45.9063 33.3421 45.974 33.6289 45.915 33.9512C45.8593 34.2556 45.7004 34.505 45.4384 34.6993C45.1764 34.8936 44.88 34.9833 44.5494 34.9684C43.3498 34.9018 42.1547 35.0384 40.9643 35.3784C39.7739 35.7183 38.6466 36.2661 37.5825 37.0216C36.5184 37.7772 35.6305 38.6614 34.9189 39.6743C34.2073 40.6871 33.6849 41.7709 33.3518 42.9254C33.2568 43.2421 33.0746 43.4925 32.8052 43.6764C32.5358 43.8604 32.2481 43.9284 31.942 43.8805C31.6182 43.8302 31.3697 43.6719 31.1964 43.4055C31.0232 43.1392 30.9803 42.8425 31.068 42.5154C31.4521 41.0741 32.081 39.7237 32.9547 38.4642C33.8284 37.2046 34.9297 36.1027 36.2585 35.1585Z"/>
+<path fill="#271b49" stroke-width="2" stroke-linecap="round" stroke="#271b49" d="M51.4667 46.4889C51.0435 46.1715 50.5289 46 50 46C49.4711 46 48.9565 46.1715 48.5333 46.4889L39.9778 52.9056C39.6742 53.1332 39.4278 53.4285 39.2581 53.7679C39.0884 54.1073 39 54.4816 39 54.8611V66.4722C39 67.1205 39.2575 67.7423 39.716 68.2007C40.1744 68.6591 40.7961 68.9167 41.4444 68.9167H46.2111C46.5677 68.9167 46.9096 68.775 47.1618 68.5229C47.4139 68.2708 47.5556 67.9288 47.5556 67.5722V61.5833C47.5556 60.935 47.8131 60.3133 48.2715 59.8549C48.7299 59.3964 49.3517 59.1389 50 59.1389C50.6483 59.1389 51.2701 59.3964 51.7285 59.8549C52.1869 60.3133 52.4444 60.935 52.4444 61.5833V67.5722C52.4444 67.9288 52.5861 68.2708 52.8382 68.5229C53.0904 68.775 53.4323 68.9167 53.7889 68.9167H58.5556C59.2039 68.9167 59.8256 68.6591 60.284 68.2007C60.7425 67.7423 61 67.1205 61 66.4722V54.8611C61 54.4816 60.9116 54.1073 60.7419 53.7679C60.5722 53.4285 60.3258 53.1332 60.0222 52.9056L51.4667 46.4889Z"/>
+<path class="part1" filter="url(#logo-shadow)" stroke-width="2" stroke-linecap="round" stroke="url(#grad-stroke)" d="M51.4667 46.4889C51.0435 46.1715 50.5289 46 50 46C49.4711 46 48.9565 46.1715 48.5333 46.4889L39.9778 52.9056C39.6742 53.1332 39.4278 53.4285 39.2581 53.7679C39.0884 54.1073 39 54.4816 39 54.8611V66.4722C39 67.1205 39.2575 67.7423 39.716 68.2007C40.1744 68.6591 40.7961 68.9167 41.4444 68.9167H46.2111C46.5677 68.9167 46.9096 68.775 47.1618 68.5229C47.4139 68.2708 47.5556 67.9288 47.5556 67.5722V61.5833C47.5556 60.935 47.8131 60.3133 48.2715 59.8549C48.7299 59.3964 49.3517 59.1389 50 59.1389C50.6483 59.1389 51.2701 59.3964 51.7285 59.8549C52.1869 60.3133 52.4444 60.935 52.4444 61.5833V67.5722C52.4444 67.9288 52.5861 68.2708 52.8382 68.5229C53.0904 68.775 53.4323 68.9167 53.7889 68.9167H58.5556C59.2039 68.9167 59.8256 68.6591 60.284 68.2007C60.7425 67.7423 61 67.1205 61 66.4722V54.8611C61 54.4816 60.9116 54.1073 60.7419 53.7679C60.5722 53.4285 60.3258 53.1332 60.0222 52.9056L51.4667 46.4889Z"/>
+</svg>
+<span>TechNest</span>
+</div>
+
+<ul class="section-list">
+
+<li class="Section">
+<img class="icon1" src="Icons/dashboard1.svg">
+<img class="icon2" src="Icons/dashboard2.svg">
+<span>Dashboard</span>
+</li>
+
+<li class="Section">
+<img class="icon1" src="Icons/notifications1.svg">
+<img class="icon2" src="Icons/notifications2.svg">
+<span>Notifications</span>
+</li>
+
+<li class="Section">
+<img class="icon1" src="Icons/updates1.svg">
+<img class="icon2" src="Icons/updates2.svg">
+<span>Updates</span>
+</li>
+
+<li class="Section">
+<img class="icon1" src="Icons/settings1.svg">
+<img class="icon2" src="Icons/settings2.svg">
+<span>Settings</span>
+</li>
+
+<li class="Section">
+<img class="icon1" src="Icons/support1.svg">
+<img class="icon2" src="Icons/support2.svg">
+<span>Support</span>
+</li>
+
+<li class="Section">
+<img class="icon1" src="Icons/personal1.svg">
+<img class="icon2" src="Icons/personal2.svg">
+<span>Account</span>
+</li>
+
+</ul>
+
+</div>
+
+<div class="item-container">
+
+<ul class="item-list">
+
+<li class="item">
+<div class="content">
+<img src="Media/livingroom.jpg">
+<span class="room">Living Room</span>
+
+<div class="Info">
+
+<div class="info">
+<span class="text1">Temperature</span>
+<span class="text2">22°c</span>
+</div>
+
+<div class="info X">
+<span class="text1">Smart TV</span>
+<span class="text2">Off</span>
+</div>
+
+</div>
+<svg width="133%" height="133%" viewBox="0 0 100 100">
+<rect x="12.5" y="12.5" width="75" height="75" fill="none" stroke="url(#grad-stroke)" stroke-width="1" rx="10" ry="10" filter="url(#stroke-shadow)"/>
+</svg>
+</li>
+
+<li class="item">
+<div class="content">
+<img src="Media/bedroom.jpg">
+<span class="room">Bedroom</span>
+
+<div class="Info">
+
+<div class="info">
+<span class="text1">Temperature</span>
+<span class="text2">20°c</span>
+</div>
+
+<div class="info X">
+<span class="text1">Air conditioner</span>
+<span class="text2">On</span>
+</div>
+
+</div>
+
+</div>
+<svg width="133%" height="133%" viewBox="0 0 100 100">
+<rect x="12.5" y="12.5" width="75" height="75" fill="none" stroke="url(#grad-stroke)" stroke-width="1" rx="10" ry="10" filter="url(#stroke-shadow)"/>
+</svg>
+</li>
+
+<li class="item">
+<div class="content">
+<img src="Media/kids-room.jpg">
+<span class="room">Kids Room</span>
+
+<div class="Info">
+
+<div class="info">
+<span class="text1">Temperature</span>
+<span class="text2">25°c</span>
+</div>
+
+<div class="info X">
+<span class="text1">Lights</span>
+<span class="text2">On</span>
+</div>
+
+</div>
+<svg width="133%" height="133%" viewBox="0 0 100 100">
+<rect x="12.5" y="12.5" width="75" height="75" fill="none" stroke="url(#grad-stroke)" stroke-width="1" rx="10" ry="10" filter="url(#stroke-shadow)"/>
+</svg>
+</li>
+
+<li class="item">
+<div class="content">
+<img src="Media/desk-room.jpg">
+<span class="room">Desk Room</span>
+
+<div class="Info">
+
+<div class="info">
+<span class="text1">Temperature</span>
+<span class="text2">22°c</span>
+</div>
+
+<div class="info X">
+<span class="text1">Lights</span>
+<span class="text2">Off</span>
+</div>
+
+</div>
+
+</div>
+<svg width="133%" height="133%" viewBox="0 0 100 100">
+<rect x="12.5" y="12.5" width="75" height="75" fill="none" stroke="url(#grad-stroke)" stroke-width="1" rx="10" ry="10" filter="url(#stroke-shadow)"/>
+</svg>
+</li>
+
+<li class="item">
+<div class="content">
+<img src="Media/kitchen.jpg">
+<span class="room">Kitchen</span>
+
+<div class="Info">
+
+<div class="info">
+<span class="text1">Temperature</span>
+<span class="text2">26°c</span>
+</div>
+
+<div class="info X">
+<span class="text1">Microwave</span>
+<span class="text2">On</span>
+</div>
+
+</div>
+<svg width="133%" height="133%" viewBox="0 0 100 100">
+<rect x="12.5" y="12.5" width="75" height="75" fill="none" stroke="url(#grad-stroke)" stroke-width="1" rx="10" ry="10" filter="url(#stroke-shadow)"/>
+</svg>
+</li>
+
+<li class="item">
+<div class="content">
+<img src="Media/bathroom.jpg">
+<span class="room">Bathroom</span>
+
+<div class="Info">
+
+<div class="info">
+<span class="text1">Temperature</span>
+<span class="text2">25°c</span>
+</div>
+
+<div class="info X">
+<span class="text1">Water Heater</span>
+<span class="text2">Off</span>
+</div>
+
+</div>
+<svg width="133%" height="133%" viewBox="0 0 100 100">
+<rect x="12.5" y="12.5" width="75" height="75" fill="none" stroke="url(#grad-stroke)" stroke-width="1" rx="10" ry="10" filter="url(#stroke-shadow)"/>
+</svg>
+</li>
+
+</ul>
+
+<div class="slide">Notifications</div>
+<div class="slide">Updates</div>
+<div class="slide">Settings</div>
+<div class="slide">Support</div>
+<div class="slide">Account</div>
+
+<div class="Back"><img src="Icons/plus-control.svg"></div>
+
+</div>
+
+
+<div class="details">
+
+<!-- Details Living Room -->
+<ul class="details-list">
+    
+    <!-- Lighting -->
+    <li class="section lighting">
+    
+    <div class="title">
+    <img src="Icons/lamp.svg">
+    <span>Lighting</span>
+    </div>
+    
+    <ul class="lighting" style="grid-template-columns:repeat(3,50px);column-gap:calc((100% - 210px)/2);top:70px;">
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 1</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 2</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 3</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 4</span>
+    </li>
+
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 5</span>
+    </li>
+        
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 6</span>
+    </li>
+    
+    </ul>
+    
+    </li>
+    
+    
+    <!-- Air Conditioner 1 -->
+    <li class="section air-conditioner">
+    
+    <div class="title">
+    <img src="Icons/air-conditioner.svg" style="transform:translateX(5px);">
+    <span style="transform:translateX(10px);">Air Conditioner 1</span>
+    </div>
+    
+    <section class="power" style="top:60px;">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="swing">
+    
+    <div class="toggle">
+    <div class="background"></div>
+    <div class="thumb"></div>
+    </div>
+    
+    <span>Swing</span>
+    </section>
+    
+    <section class="temperature">
+    
+    <div class="screen">
+    <span class="digital" style="transform:translateX(5px);">22</span>
+    <span class="degree">°C</span>
+    </div>
+    
+    <div class="Buttons">
+    <button class="minus"><img src="Icons/minus-control.svg"></button>
+    <button class="plus"><img src="Icons/plus-control.svg"></button>
+    </div>
+    
+    </section>
+    
+    
+    </li>
+
+
+    
+    <!-- Air Conditioner 2 -->
+    <li class="section air-conditioner">
+    
+        <div class="title">
+        <img src="Icons/air-conditioner.svg" style="transform:translateX(5px);">
+        <span style="transform:translateX(10px);">Air Conditioner 2</span>
+        </div>
+        
+        <section class="power" style="top:60px;">
+        
+        <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+        
+        <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+        
+        <g class="on" filter="url(#svg-shadow)">
+        <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+        </g>
+        
+        </svg>
+        <span>Power</span>
+        </section>
+        
+        <section class="swing">
+        
+        <div class="toggle">
+        <div class="background"></div>
+        <div class="thumb"></div>
+        </div>
+        
+        <span>Swing</span>
+        </section>
+        
+        <section class="temperature">
+        
+        <div class="screen">
+        <span class="digital" style="transform:translateX(5px);">22</span>
+        <span class="degree">°C</span>
+        </div>
+        
+        <div class="Buttons">
+        <button class="minus"><img src="Icons/minus-control.svg"></button>
+        <button class="plus"><img src="Icons/plus-control.svg"></button>
+        </div>
+        
+        </section>
+        
+        
+        </li>
+       
+   
+    <!-- Smart TV -->
+    <li class="section tv">
+    <div class="title">
+    <img src="Icons/tv.svg">
+    <span>Smart TV</span>
+    </div>
+    
+    <section class="power">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="controls">
+    
+    <button class="up"><img src="Icons/up-control.svg"></button>
+    <button class="down"><img src="Icons/down-control.svg"></button>
+    <button class="right"><img src="Icons/plus-control.svg"></button>
+    <button class="left"><img src="Icons/minus-control.svg"></button>
+    <button class="OK">OK</button>
+    </section>
+    
+    </li>
+    
+</ul>
+
+
+<!-- Details Bedroom-->
+<ul class="details-list">
+    
+    <!-- Lighting -->
+    <li class="section lighting">
+    
+    <div class="title">
+    <img src="Icons/lamp.svg">
+    <span>Lighting</span>
+    </div>
+    
+    <ul class="lighting" style="top:70px;">
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 1</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 2</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 3</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 4</span>
+    </li>
+    
+    </ul>
+    
+    </li>
+    
+    
+    <!-- Air Conditioner -->
+    <li class="section air-conditioner">
+    
+    <div class="title">
+    <img src="Icons/air-conditioner.svg" style="transform:translateX(5px);">
+    <span style="transform:translateX(10px);">Air Conditioner</span>
+    </div>
+    
+    <section class="power active" style="top:60px;">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="swing">
+    
+    <div class="toggle">
+    <div class="background"></div>
+    <div class="thumb"></div>
+    </div>
+    
+    <span>Swing</span>
+    </section>
+    
+    <section class="temperature">
+    
+    <div class="screen">
+    <span class="digital" style="transform:translateX(5px);">22</span>
+    <span class="degree">°C</span>
+    </div>
+    
+    <div class="Buttons">
+    <button class="minus"><img src="Icons/minus-control.svg"></button>
+    <button class="plus"><img src="Icons/plus-control.svg"></button>
+    </div>
+    
+    </section>
+    
+    
+    </li>
+    
+
+    <!-- Smart TV -->
+    <li class="section tv">
+    <div class="title">
+    <img src="Icons/tv.svg">
+    <span>Smart TV</span>
+    </div>
+    
+    <section class="power">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="controls">
+    
+    <button class="up"><img src="Icons/up-control.svg"></button>
+    <button class="down"><img src="Icons/down-control.svg"></button>
+    <button class="right"><img src="Icons/plus-control.svg"></button>
+    <button class="left"><img src="Icons/minus-control.svg"></button>
+    <button class="OK">OK</button>
+    </section>
+    
+    </li>
+
+
+</ul>   
+
+
+<!-- Details Kids Room-->
+<ul class="details-list">
+    
+    <!-- Lighting -->
+    <li class="section lighting">
+    
+    <div class="title">
+    <img src="Icons/lamp.svg">
+    <span>Lighting</span>
+    </div>
+    
+    <ul class="lighting" style="top:70px;">
+    
+    <li class="lamp active">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 1</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 2</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 3</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 4</span>
+    </li>
+    
+    </ul>
+    
+    </li>
+    
+    
+    <!-- Air Conditioner -->
+    <li class="section air-conditioner">
+    
+    <div class="title">
+    <img src="Icons/air-conditioner.svg" style="transform:translateX(5px);">
+    <span style="transform:translateX(10px);">Air Conditioner</span>
+    </div>
+    
+    <section class="power" style="top:60px;">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="swing">
+    
+    <div class="toggle">
+    <div class="background"></div>
+    <div class="thumb"></div>
+    </div>
+    
+    <span>Swing</span>
+    </section>
+    
+    <section class="temperature">
+    
+    <div class="screen">
+    <span class="digital" style="transform:translateX(5px);">22</span>
+    <span class="degree">°C</span>
+    </div>
+    
+    <div class="Buttons">
+    <button class="minus"><img src="Icons/minus-control.svg"></button>
+    <button class="plus"><img src="Icons/plus-control.svg"></button>
+    </div>
+    
+    </section>
+    
+    
+    </li>
+
+    
+</ul>
+    
+
+<!-- Details Desk Room-->
+<ul class="details-list">
+    
+    <!-- Lighting -->
+    <li class="section lighting">
+    
+    <div class="title">
+    <img src="Icons/lamp.svg">
+    <span>Lighting</span>
+    </div>
+    
+    <ul class="lighting">
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 1</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 2</span>
+    </li>
+    
+    </ul>
+    
+    </li>
+    
+    
+    <!-- Air Conditioner -->
+    <li class="section air-conditioner">
+    
+    <div class="title">
+    <img src="Icons/air-conditioner.svg" style="transform:translateX(5px);">
+    <span style="transform:translateX(10px);">Air Conditioner</span>
+    </div>
+    
+    <section class="power" style="top:60px;">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="swing">
+    
+    <div class="toggle">
+    <div class="background"></div>
+    <div class="thumb"></div>
+    </div>
+    
+    <span>Swing</span>
+    </section>
+    
+    <section class="temperature">
+    
+    <div class="screen">
+    <span class="digital" style="transform:translateX(5px);">22</span>
+    <span class="degree">°C</span>
+    </div>
+    
+    <div class="Buttons">
+    <button class="minus"><img src="Icons/minus-control.svg"></button>
+    <button class="plus"><img src="Icons/plus-control.svg"></button>
+    </div>
+    
+    </section>
+    
+    
+    </li>
+    
+       
+</ul>
+
+
+<!-- Details Kitchen -->  
+<ul class="details-list">
+    
+    <!-- Lighting -->
+    <li class="section lighting">
+    
+    <div class="title">
+    <img src="Icons/lamp.svg">
+    <span>Lighting</span>
+    </div>
+    
+    <ul class="lighting" style="top:70px;">
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 1</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 2</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 3</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 4</span>
+    </li>
+    
+    </ul>
+    
+    </li>
+
+    
+    <!-- Microwave -->
+    <li class="section microwave">
+    <div class="title">
+    <img src="Icons/microwave.svg">
+    <span>Microwave</span>
+    </div>
+    
+    <section class="power active">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="heat">
+    <span>Heating</span>
+    <div class="Control">
+    <img src="Icons/Control.svg">
+    <div class="control"><img class="arrow" src="Icons/arrow-control.svg"></div>
+    </div>
+    </section>
+    </li>
+    
+    
+    <!-- Kettle -->
+    <li class="section kettle">
+    <div class="title">
+    <img src="Icons/kettle.svg">
+    <span>Kettle</span>
+    </div>
+    
+    <section class="power">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <ul class="presets">
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>40°C ( Warm Water ) </span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>90°C ( Coffee - Tea )</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>100°C ( Boiling Water )</span>
+    </li>
+    
+    </ul>
+    
+    </li>
+    
+    
+    <!-- Fan -->
+    <li class="section fan">
+    <div class="title">
+    <img src="Icons/roof-fan.svg">
+    <span>Fan</span>
+    </div>
+    
+    <section class="power" style="top:60px;">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="swing">
+    
+    <div class="toggle">
+    <div class="background"></div>
+    <div class="thumb"></div>
+    </div>
+    
+    <span>Swing</span>
+    </section>
+    
+    <section class="heat">
+    <span>Speed</span>
+    <div class="Control">
+    <img src="Icons/Control.svg">
+    <div class="control"><img class="arrow" src="Icons/arrow-control.svg"></div>
+    </div>
+    </section>
+    
+    </li>
+    
+    
+</ul>
+    
+
+<!-- Details Bathroom -->
+<ul class="details-list">
+    
+    <!-- Lighting -->
+    <li class="section lighting">
+    
+    <div class="title">
+    <img src="Icons/lamp.svg">
+    <span>Lighting</span>
+    </div>
+    
+    <ul class="lighting">
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 1</span>
+    </li>
+    
+    <li class="lamp">
+    <div class="stroke">
+    <div class="circle"></div>
+    </div>
+    <span>Lamp 2</span>
+    </li>
+    
+    </ul>
+    
+    </li>
+    
+
+    <!-- Water Heater -->
+    <li class="section heater">
+    <div class="title">
+    <img src="Icons/heater.svg">
+    <span>Water Heater</span>
+    </div>
+    <section class="power">
+    
+    <svg width="45" height="45" viewBox="-10 -10 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <path class="off" fill="rgba(255,255,255,0.5)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    
+    <g class="on" filter="url(#svg-shadow)">
+    <path fill="url(#grad-stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M14.2851 1.78575C14.2851 1.31214 14.0969 0.857926 13.7621 0.523033C13.4272 0.188141 12.9729 0 12.4993 0C12.0257 0 11.5715 0.188141 11.2366 0.523033C10.9017 0.857926 10.7136 1.31214 10.7136 1.78575V10.852C10.7136 11.3256 10.9017 11.7798 11.2366 12.1147C11.5715 12.4496 12.0257 12.6377 12.4993 12.6377C12.9729 12.6377 13.4272 12.4496 13.7621 12.1147C14.0969 11.7798 14.2851 11.3256 14.2851 10.852V1.78575ZM7.0046 5.4626C7.37455 5.17014 7.61379 4.74322 7.67012 4.27501C7.72644 3.8068 7.59528 3.33532 7.30525 2.96346C7.01521 2.59161 6.58986 2.34958 6.12203 2.29019C5.6542 2.2308 5.18187 2.35888 4.80813 2.64648C2.75636 4.24822 1.25579 6.4505 0.515792 8.94604C-0.224206 11.4416 -0.166714 14.1059 0.680245 16.5672C1.5272 19.0285 3.12138 21.164 5.24033 22.6757C7.35928 24.1874 9.89729 25 12.5002 25C15.1032 25 17.6412 24.1874 19.7601 22.6757C21.8791 21.164 23.4733 19.0285 24.3202 16.5672C25.1672 14.1059 25.2247 11.4416 24.4847 8.94604C23.7447 6.4505 22.2441 4.24822 20.1923 2.64648C19.8189 2.35497 19.345 2.22375 18.8748 2.28169C18.4046 2.33963 17.9767 2.58197 17.6852 2.95541C17.3936 3.32885 17.2624 3.8028 17.3204 4.27299C17.3783 4.74318 17.6206 5.1711 17.9941 5.4626C19.4595 6.60676 20.5313 8.17983 21.0598 9.96234C21.5882 11.7448 21.5471 13.6479 20.9421 15.4059C20.3371 17.1639 19.1984 18.6892 17.6849 19.769C16.1714 20.8487 14.3585 21.4291 12.4993 21.4291C10.6401 21.4291 8.82731 20.8487 7.31379 19.769C5.80028 18.6892 4.66158 17.1639 4.05657 15.4059C3.45157 13.6479 3.41044 11.7448 3.93892 9.96234C4.46741 8.17983 5.53914 6.60676 7.0046 5.4626Z"/>
+    </g>
+    
+    </svg>
+    <span>Power</span>
+    </section>
+    
+    <section class="heat">
+    <span>Temperature °C</span>
+    <div class="Control">
+    <img src="Icons/Control.svg">
+    <img src="Icons/degrees.svg" style="position:absolute;">
+    <div class="control"><img class="arrow" src="Icons/arrow-control.svg"></div>
+    </div>
+    </section>
+    </li>
+
+    
+</ul>
+
+<div class="back"><img src="Icons/plus-control.svg"></div>
+
+</div>
+
+<!-- end of details -->
+
+
+</div>
+
+<!-- end of SideNavbar -->
+<div class="mouse">
+<div class="cursor"></div>
+</div>
+<div class="Block"></div>
+
+</div>
+
+<!-- end of Body -->
+
+<svg style="pointer-events:none;">
+<defs>
+
+<!-- Gradient stroke -->
+<linearGradient id="grad-stroke" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#f70f8b"/>
+<stop offset="100%" stop-color="#fc08b7"/>
+</linearGradient>
+
+<!-- Shadow filter -->
+<filter id="stroke-shadow" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#f70f8b" flood-opacity="1" />
+</filter>
+
+<filter id="svg-shadow" x="-100%" y="-100%" width="300%" height="300%">
+<feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#f70f8b" flood-opacity="1"/>
+</filter>
+</defs>
+
+<filter id="logo-shadow" x="-200%" y="-200%" width="600%" height="600%">
+  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#f70f8b" flood-opacity="0.5"/>
+</filter>
+
+</svg>
+
+<script src="JS/SmartHome.js"></script>
+<script>
+
+const Mouse = document.querySelector(".mouse");
+
+document.querySelector(".section-container").classList.remove("active");
+document.querySelector(".section-list").classList.remove("active");
+document.querySelector(".logo").style.display="none";
+
+function Show() {
+
+document.querySelector(".section-container").classList.add("active");
+document.querySelector(".logo").style.display="flex";
+
+setTimeout(() => {
+
+document.querySelector(".section-list").classList.add("active");
+
+Mouse.style.transform="translate(-90px,-150px)";
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+Sections[0].click();
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(90px,-160px)";
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+Items[1].click();
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+},600);
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,260px)";
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,10px)";
+Details.scrollTop = 250;
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(35px,-25px)";
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+AirConditioners[2].querySelector(".minus").click();
+AirConditioners[2].querySelector(".minus").classList.add("active");
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+AirConditioners[2].querySelector(".minus").classList.remove("active");
+
+},600);
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+AirConditioners[2].querySelector(".minus").click();
+AirConditioners[2].querySelector(".minus").classList.add("active");
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+AirConditioners[2].querySelector(".minus").classList.remove("active");
+
+},600);
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(-90px,160px)";
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+Powers[4].click();
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+},600);
+
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,-100px)";
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,100px)";
+Details.scrollTop = 0;
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(130px,-260px)";
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+Back.classList.add("active");
+Back.click();
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+Back.classList.remove("active");
+
+},600);
+
+setTimeout(() => {
+AirConditioners[2].querySelector(".plus").click();
+AirConditioners[2].querySelector(".plus").click();
+Powers[4].click();
+Mouse.style.transform="translate(-80px,140px)";
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+Items[4].click();
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+},600);
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,250px)";
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,-250px)";
+Details.scrollTop = 500;
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,-250px)";
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(0,250px)";
+Details.scrollTop = 0;
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(130px,-260px)";
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+Back.classList.add("active");
+Back.click();
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+Back.classList.remove("active");
+
+},600);
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.add("active");
+BACK.classList.add("active");
+BACK.click();
+
+setTimeout(() => {
+Mouse.querySelector(".cursor").classList.remove("active");
+BACK.classList.remove("active");
+
+},600);
+
+setTimeout(() => {
+
+Mouse.style.transform="translate(180px,50px)";
+document.querySelector(".section-container").classList.remove("active");
+
+setTimeout(() => {
+
+document.querySelector(".section-list").classList.remove("active");
+document.querySelector(".logo").style.display="none";
+
+},100);
+
+},1000);
+
+},1500);
+
+},500);
+},600);
+
+},500);
+},600);
+
+},800);
+},1000);
+
+},500);
+},800);
+
+},500);
+},500);
+
+},500);
+},500);
+
+},500);
+},500);
+
+},700);
+
+},500);
+},500);
+
+},500);
+
+},1000);
+
+},500);
+},500);
+
+},600);
+
+},500);
+
+},5000);
+
+}
+
+Show();
+setInterval(() => {Show();},23000);
+
+</script>
+
+</body>
+
+</html>
