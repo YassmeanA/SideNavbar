@@ -372,7 +372,6 @@ pointer-events:auto;}
 .details-list {
 position:absolute;
 top:80px;
-width:calc(100% - 40px);
 display:none;
 justify-content:center;
 align-items:center;
@@ -784,6 +783,18 @@ grid-template-columns:repeat(4,calc((100vw - 100px)/4));}
 .item {
 width:calc((100vw - 100px)/4);
 height:calc((100vw - 100px)/4);}
+
+}
+
+@media screen and (max-width:600px) {
+    
+width:calc(100% - 40px);
+
+}
+
+@media screen and (min-width:600px) {
+    
+width:600px;
 
 }
 
