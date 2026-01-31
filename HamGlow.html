@@ -169,6 +169,7 @@ overflow-y:auto;
 display:flex;
 justify-content:center;
 align-items:center;
+cursor:grab;
 background:var(--Background);}
 
 .Body.touch .side-navbar {
@@ -1259,19 +1260,31 @@ const Save = document.querySelector(".account-settings .save");
 const CamerInput = document.querySelector("#CamerInput");
 const Sections = document.querySelectorAll(".account-settings section");
 
+function Resize() {
 
-//Check if the user uses touchscreen or not
 if ("ontouchstart" in document.documentElement)
 
 {Body.classList.add("touch");Body.classList.remove("mouse");}
 
 else {Body.classList.add("mouse");Body.classList.remove("touch");}
 
+if(!Body.classList.contains("touch") && window.innerHeight < 670){SideNavbar.style.width="226px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-226px";};
+}else{
+SideNavbar.style.width="220px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-220px";};}
+
+}
+
+Resize();
+
+window.addEventListener("resize", Resize);
+
 //Activate & Deactivate Side Navbar
 Ham.addEventListener("click",() => {
 
 SideNavbar.classList.add("active");
-SideNavbar.style.left="0";
+if(!Body.classList.contains("touch") && window.innerHeight < 670){SideNavbar.style.width="226px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-226px";};
+}else{
+SideNavbar.style.width="220px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-220px";};}
 
 Frames.forEach(Frame => {
 Frame.style.filter="brightness(70%)";});
@@ -1284,11 +1297,12 @@ ItemMenu.classList.remove("active");});
 
 Cross.addEventListener("click",deactivate);
 
-
 function deactivate() {
 
 SideNavbar.classList.remove("active")
-if(Body.classList.contains("touch")){SideNavbar.style.left="-220px";}else{SideNavbar.style.left="-226px";};
+if(!Body.classList.contains("touch") && window.innerHeight < 670){SideNavbar.style.width="226px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-226px";};
+}else{
+SideNavbar.style.width="220px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-220px";};}
 
 ItemMenus.forEach(ItemMenu => {
 ItemMenu.querySelector(".item-btn").classList.remove("active");
