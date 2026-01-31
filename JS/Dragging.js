@@ -12,12 +12,14 @@ function startDrag(clientX, clientY) {
   startX = clientX;
   startY = clientY;
   startLeft = parseInt(SideNavbar.style.left) || 0;
+  SideNavbar.style.cursor = "grab";
 }
 
 // While dragging
 function dragMove(clientX, clientY) {
   if (!isDragging) return;
-
+  SideNavbar.style.cursor = "grabbing";
+  
   const dx = clientX - startX;
   const dy = clientY - startY;
 
@@ -36,6 +38,7 @@ function dragMove(clientX, clientY) {
 function endDrag() {
   if (!isDragging) return;
   isDragging = false;
+  SideNavbar.style.cursor = "grab";
   SideNavbar.style.transition = "0.4s";
 
   const finalLeft = parseInt(SideNavbar.style.left) || 0;
@@ -44,7 +47,9 @@ function endDrag() {
     deactivate();
   } else {
     SideNavbar.classList.add("active");
-    SideNavbar.style.left = "0";
+    if(!Body.classList.contains("touch") && window.innerHeight < 670){SideNavbar.style.width="226px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-226px";};
+    }else{
+    SideNavbar.style.width="220px";if(SideNavbar.classList.contains("active")){SideNavbar.style.left="0px";}else{SideNavbar.style.left="-220px";};}
 
     Frames.forEach(Frame => {
       Frame.style.filter = "brightness(70%)";
