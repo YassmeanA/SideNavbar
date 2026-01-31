@@ -114,6 +114,7 @@ function onStart(e) {
   lastAngle = getAngle(e, center);
   isDraggingSpeed = true;
   e.preventDefault();
+  speedButton.style.cursor="grabbing";
 }
 
 function onMove(e) {
@@ -132,6 +133,7 @@ function onMove(e) {
 
 function onEnd() {
   isDraggingSpeed = false;
+  speedButton.style.cursor="grab";
 }
 
 // Mouse events
@@ -162,6 +164,7 @@ ranges.forEach(range => {
 
   range.addEventListener('mousedown', (e) => {
     isDraggingRange = true;
+    range.style.cursor="grabbing";
     updateLevel(e, range);
   });
 
@@ -171,6 +174,7 @@ ranges.forEach(range => {
 
   document.addEventListener('mouseup', () => {
     if (!isDraggingRange) return;
+    range.style.cursor="grab";
     isDraggingRange = false;
     const index = Array.from(ranges).indexOf(range);
     const level = range.querySelector(".level");
